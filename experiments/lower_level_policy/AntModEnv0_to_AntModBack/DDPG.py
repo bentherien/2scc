@@ -3,32 +3,36 @@ import sys
 sys.path.append(str(os.getcwd()))
 
 from lib.utils.helpers import experiments_cli, experiments_mpCommands
+
 experimentName = __file__.replace("/","-")
 
-PROCESS_BATCH_SIZE = 1
+PROCESS_BATCH_SIZE = 2
 
 #argument
 RUN_FILE = "main.py"
-ENV_NAME = "AntModEnv-v0"
+ENV_NAME = "AntModBackEnv-v0"
 POLICY = "Deterministic"
 GAMMA = 0.99        #default 0.99
 TAU = 0.005            #default 0.005
 LR = 0.0003         #default 0.0003
 ALPHA = 0.2         #default 0.2 
 SEED = 1 
-NUM_STEPS = 3000000         #default 1M 
+NUM_STEPS = 1000000         #default 1M 
 HIDDEN_SIZE = 256       #default 256
 UPDATES_PER_STEP = 1        #default 1 
-START_STEPS = 10000         #default 10000
+START_STEPS = 0         #default 10000
 TARGET_UPDATE_INTERVAL = 1      #default 1
 REPLAY_SIZE = 1000000           #default 1000000
-LOAD_FILENAME = "\"\""          #default ""
+LOAD_FILENAME = "\"logging/checkpoints/sac_checkpoint_AntModEnv-v0_policy:Deterministicdate:2021-12-05_02-08-59total_numsteps:3000813_lastreward:6506.540505362289.pt\""          #default ""
+
+f2 = "\"checkpoints/sac_checkpoint_AntModEnv-v0_Exp:experiments-lower_level_policy-AntModEnv-v0-DDPG.pydate:2021-12-09_07-45-00total_numsteps:2979609_lastreward:6794.10.pt\""
 
 #Boolean
 # EVAL = #True Default
 # ENTROPY_TUNING = #False default
 SAVE_CHECKPOINT = True
 LOAD_CHECKPOINT = False
+WANDB = True
 
 
 
@@ -38,8 +42,7 @@ if __name__ == '__main__':
 
     commands = []
 
-    for SEED in [200]:
-
+    for SEED,LOAD_FILENAME in [(22,LOAD_FILENAME),(33,f2)]:
         args1 = "--env-name {} --policy {} --experiment_name {} --gamma {} --tau {}".format(
             ENV_NAME,POLICY,experimentName,GAMMA,TAU
         )
@@ -57,12 +60,15 @@ if __name__ == '__main__':
         )
 
         if SAVE_CHECKPOINT:
-            args4 += "--save_checkpoint"
+            args4 += " --save_checkpoint"
         
         if LOAD_CHECKPOINT:
-            args4 += "--load_checkpoint"
+            args4 += " --load_checkpoint"
 
-        command = "{} {} --cuda --wandb {} {} {} {} {}".format(
+        if WANDB:
+            args4 += " --wandb"
+
+        command = "{} {} --cuda {} {} {} {} {}".format(
             PYTHON,RUN_FILE,args1,args2,args3,args4,DATA_ARG)
 
         commands.append(command)

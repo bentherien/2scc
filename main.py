@@ -5,6 +5,9 @@ https://github.com/pranz24/pytorch-soft-actor-critic
 
 import datetime
 import gym_antmod
+import environments.gym_antmodleft
+import environments.gym_antmodright
+import environments.gym_antmodback
 import itertools
 import gym
 import wandb

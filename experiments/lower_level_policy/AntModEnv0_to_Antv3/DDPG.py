@@ -6,7 +6,7 @@ from lib.utils.helpers import experiments_cli, experiments_mpCommands
 
 experimentName = __file__.replace("/","-")
 
-PROCESS_BATCH_SIZE = 1
+PROCESS_BATCH_SIZE = 2
 
 #argument
 RUN_FILE = "main.py"
@@ -25,6 +25,8 @@ TARGET_UPDATE_INTERVAL = 1      #default 1
 REPLAY_SIZE = 1000000           #default 1000000
 LOAD_FILENAME = "\"logging/checkpoints/sac_checkpoint_AntModEnv-v0_policy:Deterministicdate:2021-12-05_02-08-59total_numsteps:3000813_lastreward:6506.540505362289.pt\""          #default ""
 
+f2 = "\"checkpoints/sac_checkpoint_AntModEnv-v0_Exp:experiments-lower_level_policy-AntModEnv-v0-DDPG.pydate:2021-12-09_07-45-00total_numsteps:2979609_lastreward:6794.10.pt\""
+
 #Boolean
 # EVAL = #True Default
 # ENTROPY_TUNING = #False default
@@ -40,7 +42,7 @@ if __name__ == '__main__':
 
     commands = []
 
-    for SEED in [11,22]:
+    for SEED,LOAD_FILENAME in [(22,LOAD_FILENAME),(33,f2)]:
         args1 = "--env-name {} --policy {} --experiment_name {} --gamma {} --tau {}".format(
             ENV_NAME,POLICY,experimentName,GAMMA,TAU
         )

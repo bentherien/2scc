@@ -23,7 +23,9 @@ UPDATES_PER_STEP = 1        #default 1
 START_STEPS = 0         #default 10000
 TARGET_UPDATE_INTERVAL = 1      #default 1
 REPLAY_SIZE = 1000000           #default 1000000
-LOAD_FILENAME = "\"logging/checkpoints/sac_checkpoint_AntModEnv-v0_policy:Deterministicdate:2021-12-05_02-08-59total_numsteps:3000813_lastreward:6506.540505362289.pt\""          #default ""
+LOAD_FILENAME = "\"checkpoints/sac_checkpoint_AntModEnv-v0_Exp:experiments-lower_level_policy-AntModEnv-v0-DDPG.pydate:2021-12-09_07-45-00total_numsteps:2979609_lastreward:6794.10.pt\""
+
+#"\"logging/checkpoints/sac_checkpoint_AntModEnv-v0_policy:Deterministicdate:2021-12-05_02-08-59total_numsteps:3000813_lastreward:6506.540505362289.pt\""          #default ""
 
 #Boolean
 # EVAL = #True Default
